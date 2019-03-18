@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Site;
-use function base64_encode;
+use App\Visit;
 use Illuminate\Http\Request;
 
 class SitesController extends Controller
@@ -56,8 +56,8 @@ class SitesController extends Controller
     public function show(Site $site)
     {
         $this->authorize('update', $site);
-
-        return view('sites.show', ['site' => $site]);
+        $visits = Visit::where('site_id', $site->id)->paginate(10);
+        return view('sites.show', ['site' => $site, 'visits' => $visits]);
     }
 
     /**
