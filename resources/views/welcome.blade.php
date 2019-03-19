@@ -68,7 +68,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/sites') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -85,5 +85,11 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/tracker.js') }}" ></script>
+        <script>
+            window.onload = function() {
+                __track('$2y$10$.VlGzclg5dDHv6lWYPpkK.HlVjk1c9eIzdXyhsEG9/UNInqn0sSSu');
+            };
+        </script>
     </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Site;
 use App\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SitesController extends Controller
 {
@@ -42,7 +43,7 @@ class SitesController extends Controller
     {
         $attributes = $this->validateSite();
         $attributes['user_id'] = auth()->id();
-        $attributes['token'] = password_hash($attributes['url'], PASSWORD_DEFAULT);
+        $attributes['token'] = Hash::make($attributes['url']);
         Site::create($attributes);
         return redirect('/sites')->with('message', 'New site was created');
     }
