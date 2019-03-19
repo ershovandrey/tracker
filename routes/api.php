@@ -16,3 +16,4 @@ Route::get('visit', function () {
     abort(404);
 });
 Route::post('visit', 'API\VisitsController@store');
+Route::post('subscribe', 'API\SubscribeController@subscribe');
