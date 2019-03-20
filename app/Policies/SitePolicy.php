@@ -19,6 +19,7 @@ class SitePolicy
      */
     public function update(User $user, Site $site)
     {
+        // Only author can see and delete site resource.
         return $user->id == $site->user_id;
     }
 }

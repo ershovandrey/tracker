@@ -85,11 +85,5 @@
                 </div>
             </div>
         </div>
-        <script src="{{ asset('js/tracker.js') }}" ></script>
-        <script>
-            window.onload = function() {
-                __track('$2y$10$.VlGzclg5dDHv6lWYPpkK.HlVjk1c9eIzdXyhsEG9/UNInqn0sSSu');
-            };
-        </script>
     </body>
 </html>

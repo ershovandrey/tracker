@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class SitesController extends Controller
 {
     public function __construct() {
+        // Only authenticated users can access the site resource.
         $this->middleware('auth');
     }
 
@@ -43,6 +44,8 @@ class SitesController extends Controller
     {
         $attributes = $this->validateSite();
         $attributes['user_id'] = auth()->id();
+
+        // Generate unique token for the site based on its URL.
         $attributes['token'] = Hash::make($attributes['url']);
         Site::create($attributes);
         return redirect('/sites')->with('message', 'New site was created');
@@ -56,7 +59,10 @@ class SitesController extends Controller
      */
     public function show(Site $site)
     {
+        // Apply update policy.
         $this->authorize('update', $site);
+
+        // Get paginated collection of visits for the given site.
         $visits = Visit::where('site_id', $site->id)->paginate(10);
         return view('sites.show', ['site' => $site, 'visits' => $visits]);
     }
@@ -69,6 +75,7 @@ class SitesController extends Controller
      */
     public function destroy(Site $site)
     {
+        // Apply update policy.
         $this->authorize('update', $site);
 
         $site->delete();

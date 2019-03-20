@@ -30,6 +30,8 @@ class SubscribeController extends Controller
         }
         $data = $validator->getData();
         $mailchimp = new MailChimp($data['api_key']);
+
+        // Create ListCollection manually.
         $lists = NewsletterListCollection::createFromConfig(
             [
                 'lists' => [
@@ -41,6 +43,8 @@ class SubscribeController extends Controller
             ]
         );
         $newsletter = new Newsletter($mailchimp, $lists);
+
+        // Subscribe the user via email.
         $subscriber = $newsletter->subscribe($data['email']);
         if ($subscriber && is_array($subscriber) && isset($subscriber['id'])) {
             return response()->json(['id' => $subscriber['id']]);

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
+    // Remove builtin created_at and updated_at timestamps.
     public $timestamps = false;
 
     protected $fillable = [
