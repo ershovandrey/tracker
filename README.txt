@@ -86,7 +86,7 @@ $ php artisan migrate
 12. Create new site and copy the token value
 
 13. On client site add tracker JavaScript and start the tracking
-<script src="http://[url-of-tracker-app]/js/tracker.js') }}" ></script>
+<script src="http://[url-of-tracker-app]/js/tracker.js" ></script>
 <script>
   window.onload = function() {
     __track('[put-your-token-here]');
