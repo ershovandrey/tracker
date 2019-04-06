@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Jobs\ProcessVisit;
 use App\Site;
-use App\Visit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Date;
@@ -29,10 +29,9 @@ class VisitsController extends Controller
                 'ip' => $request->getClientIp(),
                 'datetime' => Date::now(),
             ];
-            $visit = Visit::create($values);
-            if ($visit) {
-                return response('', 201);
-            }
+
+            ProcessVisit::dispatch($values);
+            return response('', 201);
         }
         return response()->json(['error' => 'Client not found'], 404);
     }

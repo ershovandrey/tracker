@@ -95,7 +95,14 @@ $ php artisan migrate
 
 14. On tracker app go to /sites and click on Visitors link of tracked client site. You will see visits records.
 
-15. For Task 2, please use /api/subscribe endpoint
+15. By default the visits entry will be processed by default 'sync' queue driver which will execute jobs immediately.
+If you want to process visits via Redis queue you need to:
+ 1) Replace the 'sync' driver with 'redis' driver inside the .env file (QUEUE_CONNECTION=redis)
+ 2) Run the horizon
+    $ php artisan horizon
+ 3) Watch for the jobs processing on /horizon/recent-jobs page
+
+16. For Task 2, please use /api/subscribe endpoint
 
 ------------------------------------------------------------------------------------------------------------------------
 Additional information:
