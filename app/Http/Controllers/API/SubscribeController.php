@@ -26,10 +26,15 @@ class SubscribeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response('', 406);
+            return response()->json(['error' => 'Wrong params passed'], 406);
         }
         $data = $validator->getData();
-        $mailchimp = new MailChimp($data['api_key']);
+        try {
+            $mailchimp = new MailChimp($data['api_key']);
+        }
+        catch (\Exception $ex) {
+            return response()->json(['error' => $ex->getMessage()], 406);
+        }
 
         // Create ListCollection manually.
         $lists = NewsletterListCollection::createFromConfig(
@@ -49,6 +54,6 @@ class SubscribeController extends Controller
         if ($subscriber && is_array($subscriber) && isset($subscriber['id'])) {
             return response()->json(['id' => $subscriber['id']]);
         }
-        return response('', 404);
+        return response()->json(['error' => 'Cannot subscrbe the given email to the MailChimp list'], 406);
     }
 }

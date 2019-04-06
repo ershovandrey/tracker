@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('visit', function () {
-    abort(404);
+    return response('Resource not found', 404);
 });
 Route::options('visit', function() {
     return '';
