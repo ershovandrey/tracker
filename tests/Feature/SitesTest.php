@@ -17,9 +17,9 @@ class SitesTest extends TestCase {
         $this->actingAs(factory('App\User')->create());
 
         // When I hit the endpoint /sites to create a new site and pass the required data
-        $url = $this->faker()->url();
+        $url = $this->faker()->url;
         $this->post('/sites', [
-            'title' => $this->faker()->title(),
+            'title' => $this->faker()->realText(20),
             'url' => $url,
         ]);
 

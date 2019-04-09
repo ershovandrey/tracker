@@ -54,6 +54,6 @@ class SubscribeController extends Controller
         if ($subscriber && is_array($subscriber) && isset($subscriber['id'])) {
             return response()->json(['id' => $subscriber['id']]);
         }
-        return response()->json(['error' => 'Cannot subscrbe the given email to the MailChimp list'], 406);
+        return response()->json(['error' => 'Cannot subscribe the given email to the MailChimp list'], 406);
     }
 }
